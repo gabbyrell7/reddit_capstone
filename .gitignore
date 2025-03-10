@@ -1,0 +1,4 @@
+*.csv
+creds.py
+reddit_credentials.py
+__pycache__
