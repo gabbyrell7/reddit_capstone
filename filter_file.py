@@ -5,6 +5,7 @@ import sys
 import csv
 from datetime import datetime
 import logging.handlers
+import traceback
 
 # put the path to the input file, or a folder of files to process all of
 #input_file = r"\\MYCLOUDPR4100\Public\reddit\subreddits23\wallstreetbets_submissions.zst"
@@ -29,7 +30,7 @@ write_bad_lines = True
 
 # only output items between these two dates
 target_date_start = "2018-01-01"
-target_date_end = "2018-02-02"
+target_date_end = "2024-12-31"
 
 from_date = datetime.strptime(target_date_start, "%Y-%m-%d")
 to_date = datetime.strptime(target_date_end, "%Y-%m-%d")
@@ -51,7 +52,8 @@ to_date = datetime.strptime(target_date_end, "%Y-%m-%d")
 field = "selftext"
 #values = ["stonk","moon"]
 #values = ["lazy","lousy","dirty","bad","terrible","horrible","unreliable","wrong","hate","sucks"]
-values = ["lazy","terrible","horrible","unreliable","sucks"]
+#values = ["lazy","terrible","horrible","unreliable","sucks"]
+values = ["bad"]
 exact_match = False
 #
 #
@@ -59,8 +61,9 @@ exact_match = False
 # add your submission filters and set the output file name to something unique
 #input_file = r"../reddit_data/reddit/submissions/RS_2018-03.zst"
 #input_file = r"../reddit_data/reddit/submissions/subset"
-input_file = r"submissions/subset"
-output_file = target_date_start+"_"+ target_date_end + ".filtered_submissions"
+input_file = r"submissions"
+#output_file = target_date_start+"_"+ target_date_end + ".filtered_submissions"
+output_file = "FILTERED_SUBMISSIONS" 
 output_format = "csv"
 # field = "author"
 # values = ["watchful1"]
@@ -195,7 +198,7 @@ def process_file(input_file, output_file, output_format, field, values, from_dat
 		handle = open(output_path, 'w', encoding='UTF-8')
 	elif output_format == "csv":
 		handle = open(output_path, 'w', encoding='UTF-8', newline='')
-		writer = csv.writer(handle)
+		writer = csv.writer(handle, quoting=csv.QUOTE_MINIMAL, escapechar='\\')
 	else:
 		log.error(f"Unsupported output format {output_format}")
 		sys.exit()

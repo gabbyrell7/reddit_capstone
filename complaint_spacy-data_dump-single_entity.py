@@ -1,4 +1,4 @@
-import praw
+#import praw
 import pandas as pd
 import spacy
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -216,6 +216,8 @@ def process_reddit_data(csv_file_path):
     Args:
         csv_file_path (str): The path to the CSV file containing Reddit data.
     """
+    # Extract the CSV filename (without extension) for use in output filenames
+    csv_name = os.path.splitext(os.path.basename(csv_file_path))[0]
 
     # Read the CSV file into a Pandas DataFrame
     df = read_csv_to_dataframe(csv_file_path)
