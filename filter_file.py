@@ -28,8 +28,11 @@ single_field = None
 write_bad_lines = True
 
 # only output items between these two dates
-from_date = datetime.strptime("2018-03-01", "%Y-%m-%d")
-to_date = datetime.strptime("2018-03-02", "%Y-%m-%d")
+target_date_start = "2018-01-01"
+target_date_end = "2018-02-02"
+
+from_date = datetime.strptime(target_date_start, "%Y-%m-%d")
+to_date = datetime.strptime(target_date_end, "%Y-%m-%d")
 
 # the field to filter on, the values to filter with and whether it should be an exact match
 # some examples:
@@ -47,14 +50,17 @@ to_date = datetime.strptime("2018-03-02", "%Y-%m-%d")
 # return only objects where the body contains either "stonk" or "moon". For submissions the body is in the "selftext" field, for comments it's in the "body" field
 field = "selftext"
 #values = ["stonk","moon"]
-values = ["lazy","lousy","dirty","bad","terrible","horrible","unreliable","wrong","hate","sucks"]
+#values = ["lazy","lousy","dirty","bad","terrible","horrible","unreliable","wrong","hate","sucks"]
+values = ["lazy","terrible","horrible","unreliable","sucks"]
 exact_match = False
 #
 #
 # filter a submission file and then get a file with all the comments only in those submissions. This is a multi step process
 # add your submission filters and set the output file name to something unique
-input_file = r"../reddit_data/reddit/submissions/RS_2018-03.zst"
-output_file = "2018-03-01.filtered_submissions"
+#input_file = r"../reddit_data/reddit/submissions/RS_2018-03.zst"
+#input_file = r"../reddit_data/reddit/submissions/subset"
+input_file = r"submissions/subset"
+output_file = target_date_start+"_"+ target_date_end + ".filtered_submissions"
 output_format = "csv"
 # field = "author"
 # values = ["watchful1"]
