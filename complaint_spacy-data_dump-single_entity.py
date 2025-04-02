@@ -122,7 +122,7 @@ def analyze_top_entities(df):
 #top_entities_result, df_filtered_result = analyze_top_entities(df.copy())
 # ------------------------------------------------------------
 
-def plot_entity_frequency_over_time(df):
+def plot_entity_frequency_over_time(df, output_dir, csv_name):
     """
     Plots the frequency of entities over time (created_utc).
 
@@ -171,7 +171,7 @@ def get_sentiment(text):
 # ------------------------------------------------------------
 import matplotlib.pyplot as plt
 
-def plot_entity_sentiment_over_time(df):
+def plot_entity_sentiment_over_time(df, output_dir, csv_name):
     """
     Plots the sentiment value of entities over time (created_utc).
 
@@ -208,7 +208,7 @@ def plot_entity_sentiment_over_time(df):
 #plot_entity_sentiment_over_time(df_filtered_result)
 
 # ------------------------------------------------------------
-def process_reddit_data(csv_file_path):
+def process_reddit_data(csv_file_path, output_dir):
     """
     Processes Reddit data from a given CSV file, performing entity extraction,
     sentiment analysis, and plotting.
@@ -235,7 +235,7 @@ def process_reddit_data(csv_file_path):
     top_entities_result, df_filtered_result = analyze_top_entities(df.copy())
 
     # Plot entity frequency over time
-    plot_entity_frequency_over_time(df_filtered_result)
+    plot_entity_frequency_over_time(df_filtered_result.copy(), output_dir, csv_name)
 
     # Perform sentiment analysis
     df_filtered_result["sentiment"] = df_filtered_result["text"].apply(
@@ -243,7 +243,7 @@ def process_reddit_data(csv_file_path):
     print(df_filtered_result.head())
 
     # Plot entity sentiment over time
-    plot_entity_sentiment_over_time(df_filtered_result)
+    plot_entity_sentiment_over_time(df_filtered_result.copy(), output_dir, csv_name)
     
     # Save the filtered DataFrame to a CSV
     output_csv_path = os.path.join(output_dir, f'{csv_name}_filtered.csv')
@@ -261,5 +261,5 @@ if __name__ == "__main__":
     output_dir = "OUTPUT"  # You can change this if needed
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    process_reddit_data(csv_file_path)
+    process_reddit_data(csv_file_path, output_dir)
 
